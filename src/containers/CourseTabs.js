@@ -4,10 +4,10 @@ import React from 'react';
 export default class CourseTabs extends React.Component {
     render() {
         return (
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active"
+            <ul className="nav nav-tabs">
+                <li className="nav-item"><a className="nav-link active"
                                         href="#">Active Tab</a></li>
-                <li class="nav-item"><a class="nav-link"
+                <li className="nav-item"><a className="nav-link"
                                         href="#">Another Tab</a></li>
             </ul>
         );

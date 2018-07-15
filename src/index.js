@@ -16,7 +16,6 @@ class WhiteBoard extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <TopForm/>
                 <CourseTabs/>
                 <h1>Welcome to Whiteboard!</h1>
                 <CourseList/>

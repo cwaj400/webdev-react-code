@@ -1,8 +1,10 @@
 import React from 'react';
 import Course from './Course.js';
 import CourseEditor from './CourseEditor';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 class CourseListItem extends React.Component {
+
 
     render() {
         return (
@@ -13,11 +15,16 @@ class CourseListItem extends React.Component {
             </div>
         );
     }
+
+
 }
 
 class CourseList extends React.Component {
+
+
     constructor() {
         super();
+
 
         this.state = {
             courses: [
@@ -29,6 +36,21 @@ class CourseList extends React.Component {
 
             ]
         };
+
+        this.titleChanged = this.titleChanged.bind(this);
+
+        this.createModule = this.createModule.bind(this);
+
+    }
+
+    createModule() {
+        console.log(this.state.courses);
+    }
+
+
+    titleChanged(event) {
+        this.setState({courses: {title: event.target.value}});
+        console.log(event.target.value);
     }
 
     renderListOfCourses() {
@@ -43,11 +65,21 @@ class CourseList extends React.Component {
 
     render() {
         return (
-            <ul className="list-group">
-                {this.renderListOfCourses()}
-            </ul>
-        );
+            <div>
+                <form className="form-check" role="form">
+                    <input className="form-control"
+                           placeholder="Course Title"/>
+                    <button className="btn btn-primary btn-block" onClick={this.createModule}>
+                        <i className="fa fa-plus"></i></button>
+                </form>
+                <ul className="list-group">
+                    {this.renderListOfCourses()}
+                </ul>
+
+
+            </div>);
     }
+
 }
 
 export default CourseList;

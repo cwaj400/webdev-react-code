@@ -1,5 +1,5 @@
 import React from "react";
-import Symbol from '../../node_modules/font-awesome/css/font-awesome.min.css';
+
 
 export default class Course extends React.Component {
     render() {
