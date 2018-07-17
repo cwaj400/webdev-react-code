@@ -1,6 +1,6 @@
 let _singleton = Symbol();
 const COURSE_API_URL =
-    'https://young-stream-19352.herokuapp.com/';
+    'https://whiteboard-server-java.herokuapp.com/';
 //Change this url;
 
 class CourseService {
@@ -15,8 +15,6 @@ class CourseService {
         return this[_singleton]
     }
 
-
-    //TODO: change
     findAllCourses() {
         return fetch(COURSE_API_URL)
             .then(function(response){
