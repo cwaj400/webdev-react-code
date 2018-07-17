@@ -65,7 +65,16 @@ class CourseList extends React.Component {
 
         this.createCourse = this.createCourse.bind(this);
 
+        this.deleteCourse = this.deleteCourse.bind(this);
+
+
     }
+
+    deleteCourse(courseId) {
+        console.log('delete ' + courseId);
+        this.courseService.deleteCourse(courseId);
+    }
+
 
     componentDidMount() {
         this.courseService.findAllCourses()
@@ -74,20 +83,39 @@ class CourseList extends React.Component {
             });
     }
 
+    //TODO: button add course. Error singleton.
     courseRows() {
-        return this.state.courses.map((course, i) => {
+        return this.state.courses.map((course, i) =>
             <CourseRow course={course}
                        key={i}/>
-        });
+        );
+        var rows = this.state.courses.map((course) =>
+            <CourseRow course={course} key={course.id}
+                       delete={this.deleteCourse}/>
+        );
+    }
+
+
+    findAllCourses() {
+        this.courseService.findAllCourses()
+            .then((courses) => {
+                this.setState({courses: courses});
+                console.log(courses);
+            });
     }
 
 
     createCourse = () => {
+        this.courseService
+            .createCourse(this.state.course)
+            .then(() => {
+                this.findAllCourses();
+            });
+
         console.log(this.state.courses);
         var course = {title: this.state.title};
         this.state.courses.push(course);
-        //this.setState({})
-        this.setState({"course": this.state.courses});
+        this.setState({"courses": this.state.courses});
     };
 
 

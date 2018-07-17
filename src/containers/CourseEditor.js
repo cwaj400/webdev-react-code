@@ -1,17 +1,33 @@
 import React from 'react';
 
 
-class CourseEditor {
-    render() {
-        return (<div className="row">
-            <div className="col-4">
-                <h2>Left 1/3</h2>
-            </div>
-            <div className="col-8">
-                <h2>Right 2/3</h2>
-            </div>
-        </div>);
+class CourseEditor extends React.Component {
+    constructor(props) {
+        super(props);
+        this.selectCourse = this.selectCourse.bind(this);
+        this.state = {courseId: ''};
     }
+
+    render() {
+        return (
+            (<h3>Course {this.state.courseId}</h3>)
+        )
+    }
+
+    selectCourse(courseId) {
+        this.setState({courseId: courseId});
+    }
+
+    componentDidMount() {
+        this.selectCourse
+        (this.props.match.params.courseId);
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.selectCourse
+        (newProps.match.params.courseId);
+    }
+
 }
 
 export default CourseEditor;
