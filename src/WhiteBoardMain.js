@@ -8,9 +8,10 @@ import CourseList from './containers/CourseList';
 import Course from "./containers/Course";
 import TopForm from "./containers/TopForm";
 import CourseTabs from "./containers/CourseTabs";
-
-import {BrowserRouter as Router}
+import CourseEditor from './containers/CourseEditor';
+import {BrowserRouter as Router, Link, Route}
     from 'react-router-dom';
+
 export default class WhiteBoard extends React.Component {
     render() {
         return (

@@ -4,8 +4,8 @@ import React from 'react';
 class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.selectCourse = this.selectCourse.bind(this);
         this.state = {courseId: ''};
+        this.selectCourse = this.selectCourse.bind(this);
     }
 
     render() {
@@ -31,3 +31,4 @@ class CourseEditor extends React.Component {
 }
 
 export default CourseEditor;
+

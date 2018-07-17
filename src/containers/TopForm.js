@@ -30,7 +30,7 @@
 //                     <input type="text" placeholder="New Course Title" value={this.state.value}
 //                            onChange={this.handleChange} />
 //                 </label>
-//                 <input type="submit" value="Submit" class="btn btn-primary"/>
+//                 <input type="submit" value="Submit" "/>
 //             </form>
 //             </div>
 //         );

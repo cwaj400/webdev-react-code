@@ -4,6 +4,7 @@ import CourseEditor from './CourseEditor';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import CourseService from '../services/CourseService';
 import CourseRow from './CourseRow';
+import ModuleList from './ModuleList';
 
 
 const ModuleListItemStateless =
@@ -26,8 +27,6 @@ class CourseListItem extends React.Component {
             </div>
         );
     }
-
-
 }
 
 class CourseList extends React.Component {
@@ -139,6 +138,11 @@ class CourseList extends React.Component {
             <div>
                 <h1>Course list</h1>
                 <h2>{this.state.title}</h2>
+                <h3>Course {this.state.courseId}
+                </h3>
+                <ModuleList
+                    courseId={this.state.courseId}/>
+
                 <form className="form-check" role="form">
                     <input className="form-control"
                            placeholder="Course Title" onChange={this.titleChanged}/>
