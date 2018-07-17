@@ -11,7 +11,6 @@ import CourseTabs from "./containers/CourseTabs";
 
 
 
-
 class WhiteBoard extends React.Component {
     render() {
         return (
@@ -23,7 +22,6 @@ class WhiteBoard extends React.Component {
         )
     }
 }
-
 
 ReactDOM.render(
     <WhiteBoard/>,

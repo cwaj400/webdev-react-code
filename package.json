@@ -6,6 +6,7 @@
     "bootstrap": "^4.1.2",
     "font-awesome": "^4.7.0",
     "react": "^16.4.1",
+    "react-browser-router": "^2.1.2",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4"
   },
