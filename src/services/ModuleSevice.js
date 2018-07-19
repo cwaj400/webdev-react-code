@@ -1,10 +1,14 @@
 let _singleton = Symbol();
 
-const MODULE_API_URL =
-    'http://localhost:8080/api/module/MODULE_ID';
+
 
 
 class ModuleService {
+
+    MODULE_API_URL =
+        'http://localhost:8080/api/module/MODULE_ID';
+
+
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Singleton!!!');
@@ -17,7 +21,7 @@ class ModuleService {
     }
 
     createModule(courseId, module) {
-        return fetch(MODULE_API_URL.replace('CID', courseId),
+        return fetch(this.MODULE_API_URL.replace('CID', courseId),
             {
                 body: JSON.stringify(module),
                 headers: {'Content-Type': 'application/json'},
@@ -28,7 +32,7 @@ class ModuleService {
     }
 
     deleteModule(moduleId) {
-        return fetch(MODULE_API_URL.replace
+        return fetch(this.MODULE_API_URL.replace
         ('MODULE_ID', moduleId), {
             method: 'delete'
         })
@@ -37,7 +41,7 @@ class ModuleService {
 
     findAllModulesForCourse(courseId) {
         return fetch(
-            MODULE_API_URL
+            this.MODULE_API_URL
                 .replace('COURSE_ID', courseId))
             .then(function (response) {
                 return response.json();
