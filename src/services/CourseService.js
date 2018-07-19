@@ -19,6 +19,7 @@ class CourseService {
                 return response;
             });
     }
+
     createCourse(course) {
         return fetch(this.COURSE_API_URL, {
             method: 'post',
@@ -30,6 +31,17 @@ class CourseService {
             .then(function(response){
                 return response.json();
             });
+    }
+
+
+    updateCourse(courseId, course) {
+        return fetch(this.COURSE_API_URL+ '/' + courseId, {
+            method: 'put',
+            body: JSON.stringify(course),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
     }
 
     findAllCourses() {

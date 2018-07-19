@@ -13,9 +13,7 @@ export default class WhiteBoardMain extends React.Component {
                 <div className="container-fluid">
                     <h1>Welcome to Whiteboard!</h1>
                     <CourseTabs/>
-                    <Route path="/course/:courseId/edit"
-                           component={CourseEditor}>
-                    </Route>
+                    <Route path="/course/:courseId/edit" component={CourseEditor}/>
                     <CourseList/>
                 </div>
             </Router>

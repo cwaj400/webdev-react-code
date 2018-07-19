@@ -2,6 +2,7 @@ import React from 'react';
 import '../../../node_modules/font-awesome/css/font-awesome.min.css';
 import CourseService from '../../services/CourseService';
 import CourseRow from './CourseRow';
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 
 class CourseListItem extends React.Component {
@@ -24,7 +25,8 @@ class CourseList extends React.Component {
         this.courseService = CourseService.instance;
         this.state = {
             newCourse: {},
-            courses: []
+            alert: null,
+            courses: [],
         };
 
 
@@ -51,20 +53,47 @@ class CourseList extends React.Component {
 
         this.courseRows = this.courseRows.bind(this);
 
-        this.createCourse = this.createCourse.bind(this);
-
-        this.deleteCourse = this.deleteCourse.bind(this);
+        // this.createCourse = this.createCourse.bind(this);
+        //
+        // this.deleteCourse = this.deleteCourse.bind(this);
 
 
     }
+
 
     componentDidMount() {
         this.courseService.findAllCourses()
-            .then(courses => {
-                this.setState({courses: courses});
+            .then((courses) => {
+                this.setState({courses: courses})
             });
     }
 
+    hideAlert() {
+        console.log('Hiding alert...');
+        this.setState({
+            'alert': null
+        });
+    }
+
+
+    alerting() {
+        const getAlert = () => (
+            <SweetAlert success title="Woot!" onConfirm={() => this.hideAlert()}>Hello world!</SweetAlert>);
+        this.setState({
+            'alert': getAlert
+        })
+    }
+
+    createCourse = () => {
+
+        this.courseService.createCourse(this.state.newCourse).then(() =>
+            this.findAllCourses()).then(this.alerting());
+
+        console.log(this.state.courses);
+        var course = {title: this.state.title};
+        this.state.courses.push(course);
+        this.setState({"courses": this.state.courses})
+    };
 
     deleteCourse = (courseId) => {
         this.courseService.deleteCourse(courseId)
@@ -73,9 +102,12 @@ class CourseList extends React.Component {
     };
 
 
+    //TODO: alert
+
     courseRows() {
         var rows = this.state.courses.map((course) => {
-            return <CourseRow course={course} key={course.id} delete={this.deleteCourse}/>
+            return <CourseRow course={course} key={course.id} delete={this.deleteCourse} owner={course._owner}
+                              lastmodified={course.lastModified}/>
         });
     }
 
@@ -99,20 +131,6 @@ class CourseList extends React.Component {
     };
 
 
-    createCourse = () => {
-        this.courseService
-            .createCourse(this.state.newCourse)
-            .then(() => {
-                this.findAllCourses();
-            });
-
-        console.log(this.state.courses);
-        var course = {title: this.state.title};
-        this.state.courses.push(course);
-        this.setState({"courses": this.state.courses});
-    };
-
-
     renderListOfCourses() {
         return this.state.courses
             .map((tempcourse, i) =>  //argument. function mapped to something =>. Second argument is index.
@@ -120,6 +138,7 @@ class CourseList extends React.Component {
             );
     }
 
+    //TODO: owned by, last modified in course row.
 
     render() {
         return (
@@ -128,21 +147,27 @@ class CourseList extends React.Component {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>Title</th>
-                    </tr>
-                    <tr>
-                        <th><input onChange={this.titleChanged} className="form-control" placeholder="Course Title"/></th>
+                        <th><input onChange={this.titleChanged} className="form-control" placeholder="Course Title"/>
+                        </th>
                         <th>
                             <button onClick={this.createCourse} className="btn btn-primary">Add</button>
                         </th>
                     </tr>
+                    <tr>
+                        <th>Title</th>
+                        <th>Owned By</th>
+                        <th>Last Modified</th>
+                        <th>Delete Course</th>
+                    </tr>
+
                     </thead>
                     <tbody>
                     {this.state.courses.map((course, index) =>
                         <CourseRow key={index}
                                    deleteCourse={this.deleteCourse}
-                                   course={course}/>)}
+                                   course={course} owner={course._owner} lastmodified={course.lastModified}/>)}
                     </tbody>
+                    <td>Click Course to Edit</td>
                 </table>
             </div>
         );

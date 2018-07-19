@@ -1,35 +1,41 @@
 import React from 'react';
 import CourseService from "../../services/CourseService";
+import ModuleList from '../modules/ModuleList';
 
-
-class CourseEditor extends React.Component {
+export default class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {courseId: ''};
         this.service = CourseService.instance;
-        this.selectCourse = this.selectCourse.bind(this);
-    }
 
-    render() {
-        return (
-            (<h3>Course {this.state.courseId}</h3>)
-        )
-    }
+        this.componentDidMount = this.componentDidMount.bind(this);
 
-    selectCourse(courseId) {
-        this.setState({courseId: courseId});
+        this.state = {
+            course: {
+                modules: [{
+                    title: 'william',
+                    lessons: [{
+                        title: ''
+                    }]
+                }]
+            }
+        }
     }
 
     componentDidMount() {
-        this.selectCourse
-        (this.props.match.params.courseId);
+        this.service.findCourseById(this.props.match.params.courseId)
+            .then(course => this.setState({course: course}));
     }
 
-    componentWillReceiveProps(newProps) {
-        this.selectCourse
-        (newProps.match.params.courseId);
+    render() {
+        return(
+            <div>
+                <h2>Course Editor {this.props.match.params.courseId}</h2>
+                <h3>{this.state.course.title}</h3>
+                <ModuleList course={this.state.course}/>
+            </div>
+        )
     }
 }
 
-export default CourseEditor;
-
+//TODO: DOM nesting error
+//TODO: name of layout

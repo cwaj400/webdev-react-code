@@ -1,8 +1,5 @@
 let _singleton = Symbol();
 
-
-
-
 class ModuleService {
 
     MODULE_API_URL =
