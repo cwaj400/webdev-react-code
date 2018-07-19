@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WhiteBoard from './WhiteBoardMain';
+import WhiteBoardMain from './WhiteBoardMain';
 
 ReactDOM.render(
-    <WhiteBoard/>,
+    <WhiteBoardMain/>,
     document.getElementById('root')
 );
 

@@ -1,27 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import HelloWorld from './hello.js'
-import CourseManager from './containers/CourseManager.js';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import './containers/CourseList';
-import CourseList from './containers/CourseList';
-import Course from "./containers/Course";
-import TopForm from "./containers/TopForm";
-import CourseTabs from "./containers/CourseTabs";
-import CourseEditor from './containers/CourseEditor';
+import CourseTabs from "./containers/courses/CourseTabs";
+import CourseList from './containers/courses/CourseList';
+import CourseEditor from './containers/courses/CourseEditor';
 import {BrowserRouter as Router, Link, Route}
     from 'react-router-dom';
 
-export default class WhiteBoard extends React.Component {
+export default class WhiteBoardMain extends React.Component {
     render() {
         return (
             <Router>
                 <div className="container-fluid">
-                    <CourseTabs/>
                     <h1>Welcome to Whiteboard!</h1>
-                        <Route path="/course"
-                               component={CourseList}>
-                        </Route>
+                    <CourseTabs/>
                     <Route path="/course/:courseId/edit"
                            component={CourseEditor}>
                     </Route>
@@ -31,3 +22,5 @@ export default class WhiteBoard extends React.Component {
         )
     }
 }
+
+

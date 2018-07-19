@@ -1,9 +1,9 @@
 import React from 'react';
-import ModuleService from '../services/ModuleSevice.js';
+import ModuleService from '../../services/ModuleSevice.js';
 import ModuleListItem from
-        '../containers/ModuleListItem';
+        './ModuleListItem';
 import ModuleEditor from './ModuleEditor';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 

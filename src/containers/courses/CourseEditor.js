@@ -1,10 +1,12 @@
 import React from 'react';
+import CourseService from "../../services/CourseService";
 
 
 class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {courseId: ''};
+        this.service = CourseService.instance;
         this.selectCourse = this.selectCourse.bind(this);
     }
 
@@ -27,7 +29,6 @@ class CourseEditor extends React.Component {
         this.selectCourse
         (newProps.match.params.courseId);
     }
-
 }
 
 export default CourseEditor;

@@ -1,19 +1,10 @@
 import React from 'react';
 import Course from './Course.js';
 import CourseEditor from './CourseEditor';
-import '../../node_modules/font-awesome/css/font-awesome.min.css';
-import CourseService from '../services/CourseService';
+import '../../../node_modules/font-awesome/css/font-awesome.min.css';
+import CourseService from '../../services/CourseService';
 import CourseRow from './CourseRow';
-import ModuleList from './ModuleList';
-
-
-const ModuleListItemStateless =
-    ({title}) =>
-        <div>
-            <li className="list-group-item">
-                {title} (Stateless)
-            </li>
-        </div>;
+import ModuleList from '../modules/ModuleList';
 
 
 class CourseListItem extends React.Component {
@@ -21,9 +12,7 @@ class CourseListItem extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <li className="list-group-item">
-                    {this.props.title}
-                </li>
+                <li className="list-group-item">{this.props.title}</li>
             </div>
         );
     }
@@ -82,16 +71,10 @@ class CourseList extends React.Component {
             });
     }
 
-    //TODO: button add course. Error singleton.
     courseRows() {
-        return this.state.courses.map((course, i) =>
-            <CourseRow course={course}
-                       key={i}/>
-        );
-        var rows = this.state.courses.map((course) =>
-            <CourseRow course={course} key={course.id}
-                       delete={this.deleteCourse}/>
-        );
+        var rows = this.state.courses.map((course) => {
+            return <CourseRow course={course} key={course.id} delete={this.deleteCourse}/>
+        });
     }
 
 
@@ -126,9 +109,7 @@ class CourseList extends React.Component {
     renderListOfCourses() {
         return this.state.courses
             .map((tempcourse, i) =>  //argument. function mapped to something =>. Second argument is index.
-                <CourseListItem
-                    title={tempcourse.title}
-                    key={i}/>
+                <CourseListItem title={tempcourse.title} key={i}/>
             );
     }
 
@@ -136,44 +117,26 @@ class CourseList extends React.Component {
     render() {
         return (
             <div>
-                <h1>Course list</h1>
-                <h2>{this.state.title}</h2>
-                <h3>Course {this.state.courseId}
-                </h3>
-                <ModuleList
-                    courseId={this.state.courseId}/>
+                <h1>Course List</h1>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm">
+                            <h5>Title</h5>
+                            <h2>{this.state.title}</h2>
+                        </div>
+                        <div className="col-sm">
+                            <h5>ID</h5>
+                            {this.state.courseId}
+                            {this.courseRows()}
+                        </div>
+                    </div>
+                </div>
 
                 <form className="form-check" role="form">
-                    <input className="form-control"
-                           placeholder="Course Title" onChange={this.titleChanged}/>
+                    <input className="form-control" placeholder="Course Title" onChange={this.titleChanged}/>
                     <button className="btn btn-primary btn-block" onClick={this.createCourse}>
                         <i className="fa fa-plus"></i></button>
                 </form>
-
-                <div>
-                    <h2>Course List</h2>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Title</th>
-                        </tr>
-                        <tr>
-                            <th><input id="titleFld"
-                                       placeholder="cs101"/></th>
-                            <th>
-                                <button>Add</button>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                {this.courseRows()}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         );
     }
