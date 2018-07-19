@@ -12,7 +12,7 @@ const CourseRow = ({course, deleteCourse}) => {
                 </Link>
             </td>
             <td>
-                <button className="btn btn-danger" onClick={() => this.props.deleteCourse(this.props.course.id)}>
+                <button className="btn btn-danger" onClick={() => deleteCourse(course.id)}>
                     Delete Course
                 </button>
             </td>
