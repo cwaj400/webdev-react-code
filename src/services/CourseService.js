@@ -1,17 +1,20 @@
 let _singleton = Symbol();
-const COURSE_API_URL =
-    'https://whiteboard-server-java.herokuapp.com/';
+
 
 //Change this url;
 
+
 class CourseService {
+
+    COURSE_API_URL = 'https://whiteboard-server-java.herokuapp.com/';
+
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
     }
 
     createCourse(course) {
-        return fetch(COURSE_API_URL, {
+        return fetch(this.COURSE_API_URL, {
             body: JSON.stringify(course),
             headers: {
                 'Content-Type': 'application/json'
@@ -30,14 +33,14 @@ class CourseService {
     }
 
     findAllCourses() {
-        return fetch(COURSE_API_URL)
+        return fetch(this.COURSE_API_URL)
             .then(function (response) {
                 return response.json();
             });
     }
 
     deleteCourse(courseId) {
-        return fetch(COURSE_API_URL + '/' + courseId,
+        return fetch(this.COURSE_API_URL + '/' + courseId,
             {
                 method: 'DELETE'
             }).then(function (response) {

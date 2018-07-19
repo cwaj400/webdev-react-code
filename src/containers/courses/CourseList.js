@@ -58,18 +58,20 @@ class CourseList extends React.Component {
 
     }
 
-    deleteCourse(courseId) {
-        console.log('delete ' + courseId);
-        this.courseService.deleteCourse(courseId);
-    }
-
-
     componentDidMount() {
         this.courseService.findAllCourses()
             .then(courses => {
                 this.setState({courses: courses});
             });
     }
+
+
+    deleteCourse(courseId) {
+        console.log('delete ' + courseId);
+        this.courseService.deleteCourse(courseId);
+    }
+
+
 
     courseRows() {
         var rows = this.state.courses.map((course) => {
@@ -117,26 +119,24 @@ class CourseList extends React.Component {
     render() {
         return (
             <div>
-                <h1>Course List</h1>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm">
-                            <h5>Title</h5>
-                            <h2>{this.state.title}</h2>
-                        </div>
-                        <div className="col-sm">
-                            <h5>ID</h5>
-                            {this.state.courseId}
-                            {this.courseRows()}
-                        </div>
-                    </div>
-                </div>
-
-                <form className="form-check" role="form">
-                    <input className="form-control" placeholder="Course Title" onChange={this.titleChanged}/>
-                    <button className="btn btn-primary btn-block" onClick={this.createCourse}>
-                        <i className="fa fa-plus"></i></button>
-                </form>
+                <h2>Course List</h2>
+                <table className="table">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                    </tr>
+                    <tr>
+                        <th><input onChange={this.titleChanged} className="form-control" /> </th>
+                        <th><button onClick={this.createCourse} className="btn btn-primary">Add</button> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.courses.map((course, index) =>
+                        <CourseRow key={index}
+                                   deleteCourse={this.deleteCourse}
+                                   course={course}/>)}
+                    </tbody>
+                </table>
             </div>
         );
     }
