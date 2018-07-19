@@ -1,10 +1,7 @@
 import React from 'react';
-import Course from './Course.js';
-import CourseEditor from './CourseEditor';
 import '../../../node_modules/font-awesome/css/font-awesome.min.css';
 import CourseService from '../../services/CourseService';
 import CourseRow from './CourseRow';
-import ModuleList from '../modules/ModuleList';
 
 
 class CourseListItem extends React.Component {
@@ -25,7 +22,10 @@ class CourseList extends React.Component {
         super();
 
         this.courseService = CourseService.instance;
-        this.state = {courses: []};
+        this.state = {
+            newCourse: {},
+            courses: []
+        };
 
 
         //state stays with instance of component whole time.
@@ -66,11 +66,11 @@ class CourseList extends React.Component {
     }
 
 
-    deleteCourse(courseId) {
-        console.log('delete ' + courseId);
-        this.courseService.deleteCourse(courseId);
-    }
-
+    deleteCourse = (courseId) => {
+        this.courseService.deleteCourse(courseId)
+            .then(() => this.courseService.findAllCourses())
+            .then(courses => this.setState({courses: courses}))
+    };
 
 
     courseRows() {
@@ -89,9 +89,19 @@ class CourseList extends React.Component {
     }
 
 
+    titleChanged = (event) => {
+        console.log(event.target.value);
+        this.setState({
+            newCourse: {
+                title: event.target.value
+            }
+        })
+    };
+
+
     createCourse = () => {
         this.courseService
-            .createCourse(this.state.course)
+            .createCourse(this.state.newCourse)
             .then(() => {
                 this.findAllCourses();
             });
@@ -102,11 +112,6 @@ class CourseList extends React.Component {
         this.setState({"courses": this.state.courses});
     };
 
-
-    titleChanged(event) {
-        console.log(event.target.value);
-        this.setState({title: event.target.value});
-    }
 
     renderListOfCourses() {
         return this.state.courses
@@ -126,8 +131,10 @@ class CourseList extends React.Component {
                         <th>Title</th>
                     </tr>
                     <tr>
-                        <th><input onChange={this.titleChanged} className="form-control" /> </th>
-                        <th><button onClick={this.createCourse} className="btn btn-primary">Add</button> </th>
+                        <th><input onChange={this.titleChanged} className="form-control"/></th>
+                        <th>
+                            <button onClick={this.createCourse} className="btn btn-primary">Add</button>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
