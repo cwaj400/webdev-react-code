@@ -2,7 +2,6 @@ import React from 'react';
 import '../../../node_modules/font-awesome/css/font-awesome.min.css';
 import CourseService from '../../services/CourseService';
 import CourseRow from './CourseRow';
-import SweetAlert from 'react-bootstrap-sweetalert';
 
 
 class CourseListItem extends React.Component {
@@ -53,10 +52,6 @@ class CourseList extends React.Component {
 
         this.courseRows = this.courseRows.bind(this);
 
-        // this.createCourse = this.createCourse.bind(this);
-        //
-        // this.deleteCourse = this.deleteCourse.bind(this);
-
 
     }
 
@@ -76,18 +71,15 @@ class CourseList extends React.Component {
     }
 
 
-    alerting() {
-        const getAlert = () => (
-            <SweetAlert success title="Woot!" onConfirm={() => this.hideAlert()}>Hello world!</SweetAlert>);
-        this.setState({
-            'alert': getAlert
-        })
-    }
+    alerting = () => {
+        alert("Course added success");
+
+    };
 
     createCourse = () => {
 
         this.courseService.createCourse(this.state.newCourse).then(() =>
-            this.findAllCourses()).then(this.alerting());
+            this.findAllCourses()).then(this.alerting);
 
         console.log(this.state.courses);
         var course = {title: this.state.title};
@@ -101,8 +93,6 @@ class CourseList extends React.Component {
             .then(courses => this.setState({courses: courses}))
     };
 
-
-    //TODO: alert
 
     courseRows() {
         var rows = this.state.courses.map((course) => {
@@ -138,8 +128,6 @@ class CourseList extends React.Component {
             );
     }
 
-    //TODO: owned by, last modified in course row.
-
     render() {
         return (
             <div>
@@ -163,9 +151,7 @@ class CourseList extends React.Component {
                     </thead>
                     <tbody>
                     {this.state.courses.map((course, index) =>
-                        <CourseRow key={index}
-                                   deleteCourse={this.deleteCourse}
-                                   course={course} owner={course._owner} lastmodified={course.lastModified}/>)}
+                        <CourseRow key={index} deleteCourse={this.deleteCourse} course={course}/>)}
                     </tbody>
                     <td>Click Course to Edit</td>
                 </table>

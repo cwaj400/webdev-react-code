@@ -15,9 +15,9 @@ class CourseRow extends React.Component {
                     </Link>
                 </td>
                 <td>
-                    {this.props.course.owner}
+                    {this.props.course.modified}
                 </td>
-                <td>{this.props.course.lastModified}</td>
+                <td>{this.props.course.modified}</td>
                 <td>
                     <button className="btn btn-danger"
                             onClick={() =>
