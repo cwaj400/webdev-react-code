@@ -1,9 +1,9 @@
 import React from 'react';
-import CourseService from '../../services/CourseService';
-import LessonTabs from './../lessons/LessonTabs';
-import ModuleList from './../modules/ModuleList';
+import CourseService from '../services/CourseService';
+import LessonTabs from '../components/LessonTabs';
+import ModuleList from './ModuleList';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import '../../../node_modules/font-awesome/css/font-awesome.min.css';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 class CourseEditor extends React.Component {
     constructor(props) {

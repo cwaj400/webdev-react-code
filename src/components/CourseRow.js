@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import CourseEditor from "./CourseEditor";
+import CourseEditor from "../containers/CourseEditor";
 import {BrowserRouter as Router, Route}
     from 'react-router-dom';
 

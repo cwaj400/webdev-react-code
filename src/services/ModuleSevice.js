@@ -2,8 +2,8 @@ let _singleton = Symbol();
 
 class ModuleService {
 
-    MODULE_API_URL =
-        'http://localhost:8080/api/course/CID/module';
+    MODULE_API_URL = 'http://localhost:8080/api/course/CID/module';
+    MODULE_API_URL_ID = 'http://localhost:8080/api/module/MID';
 
 
     constructor(singletonToken) {
@@ -24,12 +24,12 @@ class ModuleService {
                 headers: {'Content-Type': 'application/json'},
                 method: 'POST'
             }).then(function (response) {
-            return response.json();
+            return response;
         })
     }
 
     deleteModule(moduleId) {
-        return fetch(this.MODULE_API_URL.replace('MID', moduleId), {
+        return fetch(this.MODULE_API_URL_ID.replace('MID', moduleId), {
             method: 'delete'
         })
     }
@@ -39,9 +39,18 @@ class ModuleService {
         return fetch(
             this.MODULE_API_URL.replace('CID', courseId))
             .then(function (response) {
-                //console.log(response.json());
                 return response.json();
             })
+    }
+
+    updateModule(moduleId, module) {
+        return fetch(this.MODULE_API_URL_ID.replace('MID', moduleId), {
+            method: 'PUT',
+            body: JSON.stringify(module),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
     }
 
 

@@ -1,9 +1,8 @@
 import React from 'react'
-import LessonTabs from '../lessons/LessonTabs';
-import ModuleService from '../../services/ModuleSevice';
-import ModuleListItem from './ModuleListItem';
-import './ModuleStyle.css';
-import '../../../node_modules/font-awesome/css/font-awesome.min.css';
+import ModuleService from '../services/ModuleSevice';
+import ModuleListItem from '../components/ModuleListItem';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
+import '../stylesheet.css';
 
 export default class ModuleList extends React.Component {
 
@@ -12,7 +11,8 @@ export default class ModuleList extends React.Component {
 
         this.state =
             {
-                courseId: this.props.match.params.courseId, module: {title: ''},
+                courseId: '',
+                module: {title: ''},
                 modules: []
             };
 
@@ -20,6 +20,8 @@ export default class ModuleList extends React.Component {
         this.moduleService = ModuleService.instance;
         this.setModuleTitle = this.setModuleTitle.bind(this);
         this.createModule = this.createModule.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.renderListOfModules = this.renderListOfModules.bind(this);
     }
 
 
@@ -32,18 +34,19 @@ export default class ModuleList extends React.Component {
     }
 
 
-    //TODO: state modules not a function.
+    //TODO: post error, when making module, but still works?
+
     componentDidMount() {
-        // console.log(this.props.match.params.courseId);
-        //this.setCourseId(this.props.match.params.courseId);
-        this.findAllModulesForCourse(this.state.courseId);
+        this.setCourseId(this.props.match.params.courseId);
+        this.findAllModulesForCourse(this.props.match.params.courseId);
     }
 
-    componentWillReceiveProps(newProps) {
-        // console.log("will receive");
-        // this.setCourseId(newProps.courseId);
-        // this.findAllModulesForCourse(newProps.courseId);
-    }
+
+    //
+    // componentWillReceiveProps(newProps) {
+    //     // this.setCourseId(newProps.match.courseId);
+    //     this.findAllModulesForCourse(newProps.match.courseId);
+    // }
 
     setCourseId(courseId) {
         this.setState({courseId: courseId});
@@ -63,6 +66,9 @@ export default class ModuleList extends React.Component {
     };
 
     findAllModulesForCourse(courseId) {
+        if (courseId == null || 0) {
+            return
+        }
         this.moduleService.findAllModulesForCourse(courseId).then((modules) => {
             this.setModules(modules);
         });
@@ -96,7 +102,6 @@ export default class ModuleList extends React.Component {
             return
         }
         let modules = this.state.modules.map((module) => {
-            console.log(module.title);
             return (
                 <ModuleListItem
                     parent={this}
@@ -126,9 +131,16 @@ export default class ModuleList extends React.Component {
             <div>
                 <h4>Module List for Course ID:
                     {this.state.courseId}</h4>
-                <input placeholder="New Module" value={this.state.module.title} onChange={this.setModuleTitle} className="form-control"/>
-                <button onClick={this.createModule} className="btn btn-primary">Create</button>
+                <form className="form-inline">
+                    <div className="input-group">
+                        <input placeholder="New Module" value={this.state.module.title} onChange={this.setModuleTitle}
+                               className="form-control"/>
+                        <button id="moduleBtn" onClick={this.createModule} className="btn btn-primary">Create</button>
+                    </div>
+                </form>
                 {this.renderListOfModules()}
+                <div>___________________________________</div>
+                <div aria-checked="true">Click Title to Access Lessons and Edit Module</div>
             </div>
         )
     }

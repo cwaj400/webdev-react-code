@@ -1,10 +1,11 @@
 import React from 'react';
-import CourseList from "./containers/courses/CourseList";
-import CourseEditor from "./containers/courses/CourseEditor";
+import CourseList from "./containers/CourseList";
+import CourseEditor from "./containers/CourseEditor";
 import {BrowserRouter as Router, Link, Route}
     from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import ModuleListItem from "./containers/modules/ModuleListItem";
+import ModuleListItem from "./components/ModuleListItem";
+import ModuleEditor from "./containers/ModuleEditor";
 
 class CourseManager extends React.Component {
     render() {

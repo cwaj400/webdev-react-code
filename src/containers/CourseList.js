@@ -1,7 +1,7 @@
 import React from 'react';
-import '../../../node_modules/font-awesome/css/font-awesome.min.css';
-import CourseService from '../../services/CourseService';
-import CourseRow from './CourseRow';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
+import CourseService from '../services/CourseService';
+import CourseRow from '../components/CourseRow';
 
 
 class CourseListItem extends React.Component {
@@ -64,7 +64,6 @@ class CourseList extends React.Component {
     }
 
     hideAlert() {
-        console.log('Hiding alert...');
         this.setState({
             'alert': null
         });
@@ -81,7 +80,6 @@ class CourseList extends React.Component {
         this.courseService.createCourse(this.state.newCourse).then(() =>
             this.findAllCourses()).then(this.alerting);
 
-        console.log(this.state.courses);
         var course = {title: this.state.title};
         this.state.courses.push(course);
         this.setState({"courses": this.state.courses})
@@ -106,13 +104,11 @@ class CourseList extends React.Component {
         this.courseService.findAllCourses()
             .then((courses) => {
                 this.setState({courses: courses});
-                console.log(courses);
             });
     }
 
 
     titleChanged = (event) => {
-        console.log(event.target.value);
         this.setState({
             newCourse: {
                 title: event.target.value
