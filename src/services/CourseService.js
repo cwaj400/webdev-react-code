@@ -6,7 +6,7 @@ class CourseService {
 
     findCourseById(courseId) {
         return fetch(this.COURSE_API_URL + '/' + courseId)
-            .then(function(response){
+            .then(function (response) {
                 return response.json();
             });
     }
@@ -15,7 +15,7 @@ class CourseService {
         return fetch(this.COURSE_API_URL + '/' + courseId, {
             method: 'delete'
         })
-            .then(function(response){
+            .then(function (response) {
                 return response;
             });
     }
@@ -28,14 +28,14 @@ class CourseService {
                 'content-type': 'application/json'
             }
         })
-            .then(function(response){
+            .then(function (response) {
                 return response.json();
             });
     }
 
 
     updateCourse(courseId, course) {
-        return fetch(this.COURSE_API_URL+ '/' + courseId, {
+        return fetch(this.COURSE_API_URL + '/' + courseId, {
             method: 'put',
             body: JSON.stringify(course),
             headers: {
@@ -45,8 +45,8 @@ class CourseService {
     }
 
     findAllCourses() {
-        return fetch(this.COURSE_API_URL)
-            .then(function(response){
+        return fetch(this.COURSE_API_URL, {method: 'get'})
+            .then(function (response) {
                 return response.json();
             });
     }
@@ -55,10 +55,13 @@ class CourseService {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
     }
+
+
     static get instance() {
-        if(!this[_singleton])
+        if (!this[_singleton])
             this[_singleton] = new CourseService(_singleton);
         return this[_singleton]
     }
 }
+
 export default CourseService;

@@ -5,7 +5,6 @@ import {BrowserRouter as Router, Link, Route}
     from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import ModuleListItem from "./components/ModuleListItem";
-import ModuleEditor from "./containers/ModuleEditor";
 
 class CourseManager extends React.Component {
     render() {

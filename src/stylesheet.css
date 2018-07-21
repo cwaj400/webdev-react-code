@@ -6,3 +6,14 @@
 #moduleTab {
     width: 200px;
 }
+
+#moduleEdit {
+    padding: 20px;
+    width: 4000px;
+    height: 200px;
+}
+
+#lessonBtn {
+    border-radius: 20px;
+    display: inline-block;
+}

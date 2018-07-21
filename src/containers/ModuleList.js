@@ -3,6 +3,9 @@ import ModuleService from '../services/ModuleSevice';
 import ModuleListItem from '../components/ModuleListItem';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../stylesheet.css';
+import ModuleEditor from "../containers/ModuleEditor";
+import {BrowserRouter as Router, Route}
+    from 'react-router-dom';
 
 export default class ModuleList extends React.Component {
 
@@ -101,7 +104,7 @@ export default class ModuleList extends React.Component {
         if (this.state.modules.length === 0) {
             return
         }
-        let modules = this.state.modules.map((module) => {
+        let modules = this.state.modules.map((module, i) => {
             return (
                 <ModuleListItem
                     parent={this}
@@ -128,20 +131,35 @@ export default class ModuleList extends React.Component {
 
     render() {
         return (
-            <div>
-                <h4>Module List for Course ID:
-                    {this.state.courseId}</h4>
-                <form className="form-inline">
-                    <div className="input-group">
-                        <input placeholder="New Module" value={this.state.module.title} onChange={this.setModuleTitle}
-                               className="form-control"/>
-                        <button id="moduleBtn" onClick={this.createModule} className="btn btn-primary">Create</button>
+            <Router>
+                <div>
+                    <form className="form-inline">
+                        <div className="input-group">
+                            <input placeholder="New Module" value={this.state.module.title}
+                                   onChange={this.setModuleTitle}
+                                   className="form-control"/>
+                            <button id="moduleBtn" onClick={this.createModule}
+                                    className="btn btn-primary">Create
+                            </button>
+                        </div>
+                    </form>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-4">
+                                <h2>Module List for Course ID:{this.state.courseId}</h2>
+                                {this.renderListOfModules()}
+                            </div>
+                            <div className="col-8">
+                                <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}
+                                       title={this.state.module.title}/>
+                            </div>
+                        </div>
                     </div>
-                </form>
-                {this.renderListOfModules()}
-                <div>___________________________________</div>
-                <div aria-checked="true">Click Title to Access Lessons and Edit Module</div>
-            </div>
+
+                    <div>___________________________________</div>
+                    <div aria-checked="true">Click Title to Access Lessons and Edit Module</div>
+                </div>
+            </Router>
         )
     }
 }

@@ -52,6 +52,8 @@ class CourseList extends React.Component {
 
         this.courseRows = this.courseRows.bind(this);
 
+        this.updateCourse = this.updateCourse.bind(this);
+
 
     }
 
@@ -97,6 +99,7 @@ class CourseList extends React.Component {
             return <CourseRow course={course} key={course.id} delete={this.deleteCourse} owner={course._owner}
                               lastmodified={course.lastModified}/>
         });
+        return rows;
     }
 
 
@@ -116,12 +119,10 @@ class CourseList extends React.Component {
         })
     };
 
-
-    renderListOfCourses() {
-        return this.state.courses
-            .map((tempcourse, i) =>  //argument. function mapped to something =>. Second argument is index.
-                <CourseListItem title={tempcourse.title} key={i}/>
-            );
+    updateCourse(courseId, course) {
+        if (courseId && course) {
+            this.courseService.updateCourse(courseId, course);
+        }
     }
 
     render() {
@@ -139,15 +140,17 @@ class CourseList extends React.Component {
                     </tr>
                     <tr>
                         <th>Title</th>
-                        <th>Owned By</th>
+                        <th>Created</th>
                         <th>Last Modified</th>
                         <th>Delete Course</th>
+                        <th>&nbsp;</th>
                     </tr>
 
                     </thead>
                     <tbody>
                     {this.state.courses.map((course, index) =>
-                        <CourseRow key={index} deleteCourse={this.deleteCourse} course={course}/>)}
+                        <CourseRow key={index} deleteCourse={this.deleteCourse} course={course}
+                                   updateCourse={this.updateCourse}/>)}
                     </tbody>
                     <td>Click Course to Edit</td>
                 </table>
