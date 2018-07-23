@@ -1,8 +1,10 @@
 import React from 'react';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import LessonService from '../services/LessonService';
 import ModuleSevice from '../services/ModuleSevice';
-import LessonTabs from '../components/LessonTabs';
+import Lessons from '../components/Lessons';
+import LessonEditor from './LessonEditor';
+
 
 class ModuleEditor extends React.Component {
     constructor(props) {
@@ -28,14 +30,14 @@ class ModuleEditor extends React.Component {
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.setNewLesson = this.setNewLesson.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
+        //this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     componentDidMount() {
-        this.setState({moduleId: this.props.match.params.moduleId});
-        this.setState({courseId: this.props.match.params.courseId});
-        this.findModuleById(this.props.match.params.moduleId);
-        this.findAllLessonsForModule(this.props.match.params.courseId, this.props.match.params.moduleId);
+        //this.setState({moduleId: this.props.match.params.moduleId});
+        // this.setState({courseId: this.props.match.params.courseId});
+        // this.findModuleById(this.props.match.params.moduleId);
+        // this.findAllLessonsForModule(this.props.match.params.courseId, this.props.match.params.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
@@ -66,6 +68,27 @@ class ModuleEditor extends React.Component {
         });
     }
 
+    renderListOfLessons() {
+        //call the server to render list of lesson for module id
+        // then populate <Lessons...>
+        //var leson = null;
+        if(this.state.moduleId !== "" && this.state.courseId !== "") {
+                this.lessonService.findAllLessonsForModule(this.state.courseId, this.state.moduleId)
+                    .then((response) =>{
+                        response.map((lesson) => {
+                            alert(lesson.id);
+                            var rows = <Lessons key={lesson.id} courseId={this.state.courseId}
+                            lesson={lesson} moduleId={this.state.moduleId}
+                            delete={this.deleteLesson} updateLesson={this.updateLesson}/>
+                        });
+                        return rows;
+                    });
+            }
+
+
+            //return leson;
+        }
+
     findAllLessonsForModule(courseId, moduleId) {
         console.log(this.state.lessons);
         this.lessonService.findAllLessonsForModule(courseId, moduleId).then((lessons) => {
@@ -85,9 +108,11 @@ class ModuleEditor extends React.Component {
         // this.setState({lesson: {title: ''}});
         if (this.state.lesson !== null) {
             this.lessonService.createLesson(this.state.courseId, this.state.moduleId, this.state.lesson)
-                .then(() => {this.findAllLessonsForModule(this.state.courseId, this.state.moduleId).then(this.setState({lesson: {title: ''}}));
+                .then(() => {
+                    this.findAllLessonsForModule(this.state.courseId, this.state.moduleId).then(this.setState({lesson: {title: ''}}));
                 });
         }
+        alert("Lesson Created!");
     }
 
     deleteLesson(lessonId) {
@@ -102,16 +127,6 @@ class ModuleEditor extends React.Component {
             .then(() => {
                 this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
             });
-    }
-
-    renderListOfLessons() {
-        const lessonss = this.state.lessons.map((lesson, i) => {
-            return <LessonTabs key={lesson.id} courseId={this.state.courseId}
-                               lesson={lesson} moduleId={this.state.moduleId}
-                               delete={this.deleteLesson} updateLesson={this.updateLesson}/>;
-
-        });
-        return lessonss;
     }
 
     render() {
@@ -137,8 +152,13 @@ class ModuleEditor extends React.Component {
                             </div>
                         </form>
                     </div>
-                    {this.renderListOfLessons()}
-
+                    <div>
+                        hello
+                        {this.renderListOfLessons()}
+                    </div>
+                    <div>
+                        <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
+                    </div>
                 </div>
             </div>
         </Router>);

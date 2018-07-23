@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter as Link} from 'react-router-dom';
 
-export default class LessonTabs extends React.Component {
+export default class Lessons extends React.Component {
     constructor(props) {
         super(props);
 
@@ -13,6 +13,8 @@ export default class LessonTabs extends React.Component {
         this.editLesson = this.editLesson.bind(this);
     }
 
+
+
     editLesson(event) {
         this.setState({
             lesson: {
@@ -22,14 +24,14 @@ export default class LessonTabs extends React.Component {
     }
 
     //TODO: lesson moves to another page
-
     render() {
         return (
             <div>
                 <ul>
-                    <li><h5>
-                        {this.props.lesson.title}
-                    </h5>
+                    <li><Link className="text-light"
+                              to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+                        <h5>{this.props.lesson.title} </h5>
+                    </Link>
                         <form className="form-inline">
                             <div className="input-group">
                                 <input placeholder={`Edit Name: ${this.props.lesson.title}`} onChange={this.editLesson}

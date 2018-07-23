@@ -54,8 +54,6 @@ class CourseRow extends React.Component {
                                         {title: this.state.newCourse})}
                                     className="btn btn-primary">Update Course Name
                             </button>
-
-
                         </div>
                     </form>
                 </td>
