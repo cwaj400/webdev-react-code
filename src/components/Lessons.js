@@ -36,7 +36,7 @@ export default class Lessons extends React.Component {
                         <form className="form-inline">
                             <div className="input-group">
                                 <button  type="button" id="editLsnNameBtn" onClick={() => this.props.deleteLesson(this.props.lesson.id)}
-                                        className="btn btn-danger"> Delete Lesson
+                                         className="btn btn-danger"> Delete Lesson
                                 </button>
                             </div>
                         </form>

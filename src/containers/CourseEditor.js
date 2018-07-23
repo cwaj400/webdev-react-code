@@ -11,10 +11,10 @@ class CourseEditor extends React.Component {
         this.state = {
             courseId: '',
             course: {
-                title: '',
-                lessons: [{
-                    title: ''
-                }]
+                    title: '',
+                    lessons: [{
+                        title: ''
+                    }]
             }
         };
 

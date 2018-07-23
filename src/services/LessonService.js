@@ -2,11 +2,13 @@ let _singleton = Symbol();
 
 export default class LessonService {
 
-    LESSON_MODULE_COURSE_API_URL = 'http://localhost:8080/api/course/CID/module/MID';
-    LESSON_MODULE_COURSE_API_URL_f = 'http://localhost:8080/api/course/CID/module/MID/lesson';
-    LESSON_MODULE_COURSE_API_URL_Lesson_make = 'http://localhost:8080/api/lesson';
+    LESSON_MODULE_COURSE_API_URL = "https://course-manager-backend18.herokuapp.com/api/course/CID/module/MID";
 
-    LESSON_ID_API_URL = 'http://localhost:8080/api/lesson/LID';
+    LESSON_MODULE_COURSE_API_URL_f = "https://course-manager-backend18.herokuapp.com/api/course/CID/module/MID/lesson";
+
+    LESSON_MODULE_COURSE_API_URL_Lesson_make = 'https://course-manager-backend18.herokuapp.com/api/lesson';
+
+    LESSON_ID_API_URL = 'https://course-manager-backend18.herokuapp.com/api/lesson/LID';
 
     static get instance() {
         if (!this[_singleton])
@@ -21,19 +23,6 @@ export default class LessonService {
                 return response.json();
             });
     }
-
-
-
-
-    // findAllLessonsForModule(courseId, moduleId) {
-    //     return fetch(
-    //         LESSON_MODULE_COURSE_API_URL
-    //             .replace('CID', courseId).replace('MID', moduleId))
-    //         .then(function(response) {
-    //             return response.json();
-    //         });
-    // }
-
 
     createLesson(courseId, moduleId, lesson) {
         return fetch(this.LESSON_MODULE_COURSE_API_URL_f.replace('CID', courseId)
