@@ -1,41 +1,51 @@
 import React from 'react'
+import {BrowserRouter as Link} from 'react-router-dom';
 
 export default class LessonTabs extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            selectedLessonIndex: 0
-        }
+            lesson: {
+                title: ''
+            }
+        };
+        this.editLesson = this.editLesson.bind(this);
     }
 
-    selectLesson = (index) => {
+    editLesson(event) {
         this.setState({
-            selectedLessonIndex: index
-        })
-    };
+            lesson: {
+                title: event.target.value
+            }
+        });
+    }
 
-// {this.props.module.lessons.length}
+    //TODO: lesson moves to another page
 
     render() {
         return (
             <div>
                 <ul>
-                    <h5>{this.props.lesson.title}</h5>
-                    <form className="form-inline">
-                        <div className="input-group">
-                            <input placeholder={`Edit Name: ${this.props.lesson.title}`} onChange={this.titleChanged}
-                                   className="form-control"/>
-                            <button id="moduleBtn"
-                                    onClick={this.props.updateLesson(this.props.key, this.props.lesson)}
-                                    className="btn btn-primary">Update Lesson Name
-                            </button>
-                        </div>
-                    </form>
+                    <li><h5>
+                        {this.props.lesson.title}
+                    </h5>
+                        <form className="form-inline">
+                            <div className="input-group">
+                                <input placeholder={`Edit Name: ${this.props.lesson.title}`} onChange={this.editLesson}
+                                       className="form-control" value={this.state.lesson.title}/>
+                                <button id="moduleBtn"
+                                        onClick={this.props.updateLesson}
+                                        className="btn btn-primary">Update Lesson Name
+                                </button>
+                                <button id="editLsnNameBtn" onClick={this.props.deleteLesson}
+                                        className="btn btn-danger"> Delete Lesson
+                                </button>
+                            </div>
+                        </form>
+                    </li>
                 </ul>
-                {this.state.selectedLessonIndex}
             </div>
         )
     }
 }
-
-

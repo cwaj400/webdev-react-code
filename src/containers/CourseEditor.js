@@ -11,11 +11,9 @@ class CourseEditor extends React.Component {
         this.state = {
             courseId: '',
             course: {
-                modules: [{
-                    title: '',
-                    lessons: [{
-                        title: ''
-                    }]
+                title: '',
+                lessons: [{
+                    title: ''
                 }]
             }
         };
@@ -25,8 +23,7 @@ class CourseEditor extends React.Component {
     }
 
     componentDidMount() {
-        this.selectCourse
-        (this.props.match.params.courseId);
+        this.selectCourse(this.props.match.params.courseId);
     }
 
     componentWillReceiveProps(newProps) {

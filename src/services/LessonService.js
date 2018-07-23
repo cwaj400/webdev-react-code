@@ -16,25 +16,33 @@ export default class LessonService {
 
     findAllLessonsForModule(courseId, moduleId) {
         return fetch(this.LESSON_MODULE_COURSE_API_URL_f
-            .replace('CID', courseId).replace('MID', moduleId), {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'get'
-        })
+            .replace('CID', courseId).replace('MID', moduleId))
             .then(function (response) {
                 return response.json();
             });
     }
 
+
+
+
+    // findAllLessonsForModule(courseId, moduleId) {
+    //     return fetch(
+    //         LESSON_MODULE_COURSE_API_URL
+    //             .replace('CID', courseId).replace('MID', moduleId))
+    //         .then(function(response) {
+    //             return response.json();
+    //         });
+    // }
+
+
     createLesson(courseId, moduleId, lesson) {
-        return fetch(this.LESSON_MODULE_COURSE_API_URL_Lesson_make.replace('CID', courseId)
+        return fetch(this.LESSON_MODULE_COURSE_API_URL_f.replace('CID', courseId)
             .replace('MID', moduleId), {
             body: JSON.stringify(lesson),
             headers: {
                 'Content-Type': 'application/json'
             },
-            method: 'POST'
+            method: 'post'
         }).then(function (response) {
             return response.json();
         });
