@@ -25,6 +25,7 @@ export default class ModuleList extends React.Component {
         this.createModule = this.createModule.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.renderListOfModules = this.renderListOfModules.bind(this);
+
     }
 
 

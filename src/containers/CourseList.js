@@ -28,31 +28,8 @@ class CourseList extends React.Component {
             courses: [],
         };
 
-
-        //state stays with instance of component whole time.
-        //we may want to change the state, add module, remove module, so we change state.
-        //state changes change the DOM. It will do a DOM. Look at difference.
-        //Keeps track of virtual DOM (Document Object Model). No need to render entire page.
-        // Single page applications = only need to manipulate single snippets of the DOM. Optimize.
-        // this.state = {
-        //     title: 'courir',
-        //     courses: [
-        //         {title: 'Course 1 - whatever', id: 1},
-        //         {title: 'Course 2 - MySQL', id: 2},
-        //         {title: 'Course 3 - MongoDB', id: 3},
-        //         {title: 'Course 4 - React', id: 4},
-        //         {title: 'Course 5 - JavaScript', id: 5},
-        //     ]
-        // };
-
-        this.titleChanged = this.titleChanged.bind(this);
-
-        //Added by me
-        this.componentDidMount = this.componentDidMount.bind(this);
-
-        this.courseRows = this.courseRows.bind(this);
-
         this.updateCourse = this.updateCourse.bind(this);
+        this.titleChanged = this.titleChanged.bind(this);
 
 
     }
@@ -92,15 +69,6 @@ class CourseList extends React.Component {
             .then(() => this.courseService.findAllCourses())
             .then(courses => this.setState({courses: courses}))
     };
-
-
-    courseRows() {
-        var rows = this.state.courses.map((course) => {
-            return <CourseRow course={course} key={course.id} delete={this.deleteCourse} owner={course._owner}
-                              lastmodified={course.lastModified}/>
-        });
-        return rows;
-    }
 
 
     findAllCourses() {

@@ -24,6 +24,7 @@ export default class Lessons extends React.Component {
     }
 
     //TODO: lesson moves to another page
+    //TODO: click twice
     render() {
         return (
             <div>
@@ -34,13 +35,7 @@ export default class Lessons extends React.Component {
                     </Link>
                         <form className="form-inline">
                             <div className="input-group">
-                                <input placeholder={`Edit Name: ${this.props.lesson.title}`} onChange={this.editLesson}
-                                       className="form-control" value={this.state.lesson.title}/>
-                                <button id="moduleBtn"
-                                        onClick={this.props.updateLesson}
-                                        className="btn btn-primary">Update Lesson Name
-                                </button>
-                                <button id="editLsnNameBtn" onClick={this.props.deleteLesson}
+                                <button  type="button" id="editLsnNameBtn" onClick={() => this.props.deleteLesson(this.props.lesson.id)}
                                         className="btn btn-danger"> Delete Lesson
                                 </button>
                             </div>

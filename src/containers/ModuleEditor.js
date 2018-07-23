@@ -30,21 +30,28 @@ class ModuleEditor extends React.Component {
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.setNewLesson = this.setNewLesson.bind(this);
+        this.renderListOfLessons = this.renderListOfLessons.bind(this);
+        this.findAllLessonsForModule = this.findAllLessonsForModule.bind(this);
         //this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     componentDidMount() {
-        //this.setState({moduleId: this.props.match.params.moduleId});
-        // this.setState({courseId: this.props.match.params.courseId});
-        // this.findModuleById(this.props.match.params.moduleId);
-        // this.findAllLessonsForModule(this.props.match.params.courseId, this.props.match.params.moduleId);
+        this.setState({moduleId: this.props.match.params.moduleId});
+        this.setState({courseId: this.props.match.params.courseId});
+        this.findModuleById(this.props.match.params.moduleId);
+        this.findAllLessonsForModule(this.props.match.params.courseId, this.props.match.params.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.match.params.courseId);
-        this.setModuleId(newProps.match.params.moduleId);
-        // this.findModuleById(newProps.match.params.moduleId);
-        // this.findAllLessonsForModule(newProps.match.params.courseId, newProps.match.params.moduleId);
+        //this.initLessons = this.initLessons.bind(this);
+         this.setCourseId(newProps.match.params.courseId);
+         this.setModuleId(newProps.match.params.moduleId);
+        this.findAllLessonsForModule(newProps.match.params.courseId, newProps.match.params.moduleId);
+
+    }
+
+    initLessons() {
+        this.setState({lessons: []});
     }
 
     setCourseId(courseId) {
@@ -72,27 +79,25 @@ class ModuleEditor extends React.Component {
         //call the server to render list of lesson for module id
         // then populate <Lessons...>
         //var leson = null;
-        if(this.state.moduleId !== "" && this.state.courseId !== "") {
-                this.lessonService.findAllLessonsForModule(this.state.courseId, this.state.moduleId)
-                    .then((response) =>{
-                        response.map((lesson) => {
-                            alert(lesson.id);
-                            var rows = <Lessons key={lesson.id} courseId={this.state.courseId}
-                            lesson={lesson} moduleId={this.state.moduleId}
-                            delete={this.deleteLesson} updateLesson={this.updateLesson}/>
-                        });
-                        return rows;
-                    });
-            }
-
-
-            //return leson;
+        if (this.state.moduleId === '' || this.state.courseId === '') {
+            return
         }
+        // this.setLessons(this.lessonService.findAllLessonsForModule(this.state.courseId, this.state.moduleId));
+        let leson = this.state.lessons.map((lesson, i) => {
+            return <Lessons key={lesson.id} courseId={this.state.courseId}
+                            lesson={lesson} moduleId={this.state.moduleId}
+                            deleteLesson={this.deleteLesson} updateLesson={this.updateLesson}/>
+        });
+        return leson;
+    }
 
+
+//TODO: delete lesson
     findAllLessonsForModule(courseId, moduleId) {
         console.log(this.state.lessons);
         this.lessonService.findAllLessonsForModule(courseId, moduleId).then((lessons) => {
-            this.setLessons(lessons);
+            // this.setLessons(lessons);
+            this.setState({lessons: lessons, lesson: {title: ''}});
         });
     }
 
@@ -109,10 +114,10 @@ class ModuleEditor extends React.Component {
         if (this.state.lesson !== null) {
             this.lessonService.createLesson(this.state.courseId, this.state.moduleId, this.state.lesson)
                 .then(() => {
-                    this.findAllLessonsForModule(this.state.courseId, this.state.moduleId).then(this.setState({lesson: {title: ''}}));
+                    this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
                 });
         }
-        alert("Lesson Created!");
+        //alert("Lesson Created!");
     }
 
     deleteLesson(lessonId) {
@@ -146,14 +151,13 @@ class ModuleEditor extends React.Component {
                                 <input placeholder="New Lesson Title"
                                        value={this.state.lesson.title} onChange={this.setNewLesson}
                                        className="form-control"/>
-                                <button id="lessonBtn" onClick={this.createLesson}
+                                <button type="button" id="lessonBtn" onClick={this.createLesson}
                                         className="btn btn-primary">Create Lesson For {this.state.module.title}
                                 </button>
                             </div>
                         </form>
                     </div>
                     <div>
-                        hello
                         {this.renderListOfLessons()}
                     </div>
                     <div>
