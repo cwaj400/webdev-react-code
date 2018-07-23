@@ -155,7 +155,6 @@ export default class ModuleList extends React.Component {
                             </div>
                         </div>
                     </div>
-
                     <div>___________________________________</div>
                     <div aria-checked="true">Click Title to Access Lessons and Edit Module</div>
                 </div>

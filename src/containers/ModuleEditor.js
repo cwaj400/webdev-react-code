@@ -137,8 +137,9 @@ class ModuleEditor extends React.Component {
                             </div>
                         </form>
                     </div>
+                    <ul>
                     {this.renderListOfLessons()}
-
+                    </ul>
                 </div>
             </div>
         </Router>);
