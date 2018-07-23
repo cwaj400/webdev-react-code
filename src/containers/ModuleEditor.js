@@ -44,8 +44,8 @@ class ModuleEditor extends React.Component {
 
     componentWillReceiveProps(newProps) {
         //this.initLessons = this.initLessons.bind(this);
-         this.setCourseId(newProps.match.params.courseId);
-         this.setModuleId(newProps.match.params.moduleId);
+        this.setCourseId(newProps.match.params.courseId);
+        this.setModuleId(newProps.match.params.moduleId);
         this.findAllLessonsForModule(newProps.match.params.courseId, newProps.match.params.moduleId);
 
     }

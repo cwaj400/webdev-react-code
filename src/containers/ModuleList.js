@@ -139,7 +139,7 @@ export default class ModuleList extends React.Component {
                             <input placeholder="New Module" value={this.state.module.title}
                                    onChange={this.setModuleTitle}
                                    className="form-control"/>
-                            <button id="moduleBtn" onClick={this.createModule}
+                            <button type="button" id="moduleBtn" onClick={this.createModule}
                                     className="btn btn-primary">Create
                             </button>
                         </div>
