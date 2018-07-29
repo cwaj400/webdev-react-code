@@ -5,6 +5,7 @@ import {WidgetType3} from './WidgetType3'
 import {HeadingWidget} from "./HeadingWidget"
 import {ListWidget} from "./ListWidget";
 import {YouTubeWidget} from "./YouTubeWIdget"
+import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 const WidgetListComponent = ({widgets, saveWidgets, deleteWidget, createWidget, updateWidget}) =>
 {
@@ -41,9 +42,9 @@ const WidgetListComponent = ({widgets, saveWidgets, deleteWidget, createWidget, 
                     <li className="list-group-item"
                         key={index}>
                         {widget.title} ({widget.id}) - {widget.widgetType}
-                        <button className="float-right btn btn-danger"
+                        <button type="button" className="float-right btn btn-danger"
                                 onClick={() => deleteWidget(widget.id)}>
-                            Delete
+                            Delete Widget
                         </button>
                         <div>
                             {widget.widgetType === 'YOUTUBE' && <YouTubeWidget widget={widget} updateWidget={updateWidget}/>}
