@@ -25,12 +25,12 @@ const dispatcherToPropertyMapper = dispatch => (
             type: 'SAVE_WIDGETS'
         })
     }
-)
+);
 
 const WidgetListContainer =
     connect(
         stateToPropertyMapper,
         dispatcherToPropertyMapper)
-    (WidgetListComponent)
+    (WidgetListComponent);
 
 export default WidgetListContainer

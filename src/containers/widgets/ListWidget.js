@@ -1,8 +1,8 @@
 import React from 'react'
 
 export const ListWidget = ({widget, updateWidget}) => {
-    let text
-    let ordered
+    let text;
+    let ordered;
     return(
         <div>
             <h3>List Widget</h3>
