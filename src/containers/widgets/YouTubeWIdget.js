@@ -22,4 +22,4 @@ export const YouTubeWidget = ({widget, updateWidget}) => {
                     allowFullScreen></iframe>
         </div>
     )
-}
+};

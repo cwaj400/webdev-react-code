@@ -6,6 +6,12 @@ class ModuleService {
     MODULE_API_URL_ID = 'https://course-manager-backend18.herokuapp.com/api/module/MID';
     MODULE_GET_ALL = 'https://course-manager-backend18.herokuapp.com/api/module';
 
+
+
+    // MODULE_API_URL = 'http://localhost:3000/api/course/CID/module';
+    // MODULE_API_URL_ID = 'http://localhost:3000/api/module/MID';
+    // MODULE_GET_ALL = 'http://localhost:3000/api/module';
+
     static get instance() {
         if (!this[_singleton])
             this[_singleton] = new ModuleService(_singleton);

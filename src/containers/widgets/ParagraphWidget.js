@@ -7,7 +7,7 @@ export const ParagraphWidget = ({widget, updateWidget}) => {
             <h3>Paragraph Widget - {widget.title}</h3>
             <p>Enter topic description: </p>
             <textarea ref={node => paragraph = node}
-                      className='form-control'
+                      className="form-control"
                       placeholder="Paragraph Text"
                       onChange={() => {
                           widget.paragraph = paragraph.value;
@@ -16,3 +16,4 @@ export const ParagraphWidget = ({widget, updateWidget}) => {
         </div>
     );
 };
+

@@ -8,14 +8,8 @@ export const ImageWidget = ({widget, updateWidget}) => {
         <h4> {widget.name}</h4>
         <h2>Image Link:
         </h2>
-        <input ref={node => src = node} id="URL" className='form-control' placeholder="www.../img" onChange={() => {
+        <input ref={node => src = node} id="URL" className='form-control' placeholder="Image Link" onChange={() => {
             widget.src = src.value;
-            updateWidget(widget);
-        }}/>
-        <p>Please enter the link text here:
-        </p>
-        <input ref={node => text = node} className='form-control' placeholder="Link here" onChange={() => {
-            widget.text = text.value;
             updateWidget(widget);
         }}/>
 

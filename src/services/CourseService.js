@@ -4,6 +4,8 @@ let _singleton = Symbol();
 class CourseService {
     COURSE_API_URL = "https://course-manager-backend18.herokuapp.com/api/course";
 
+    // COURSE_API_URL = "http://localhost:3000/api/course";
+
 
 
     findCourseById(courseId) {

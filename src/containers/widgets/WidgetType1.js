@@ -18,4 +18,4 @@ export const WidgetType1 = ({widget, updateWidget}) => {
             </select>
         </div>
     )
-}
+};

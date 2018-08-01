@@ -15,7 +15,7 @@ export const ListWidget = ({widget, updateWidget}) => {
                       value={widget.listItems}></textarea>
             <label><input ref={node => ordered = node}
                           onClick={() => {
-                              widget.ordered = ordered.checked
+                              widget.ordered = ordered.checked;
                               updateWidget(widget)
                           }}
                           checked={widget.ordered}
@@ -38,4 +38,4 @@ export const ListWidget = ({widget, updateWidget}) => {
 
         </div>
     );
-}
+};

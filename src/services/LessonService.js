@@ -10,6 +10,21 @@ export default class LessonService {
 
     LESSON_ID_API_URL = 'https://course-manager-backend18.herokuapp.com/api/lesson/LID';
 
+
+
+
+    // LESSON_MODULE_COURSE_API_URL = "http://localhost:3000/api/course/CID/module/MID";
+    //
+    // LESSON_MODULE_COURSE_API_URL_f = "http://localhost:3000/api/course/CID/module/MID/lesson";
+    //
+    // LESSON_MODULE_COURSE_API_URL_Lesson_make = 'http://localhost:3000/api/lesson';
+    //
+    // LESSON_ID_API_URL = 'http://localhost:3000/api/lesson/LID';
+
+
+
+
+
     static get instance() {
         if (!this[_singleton])
             this[_singleton] = new LessonService(_singleton);
