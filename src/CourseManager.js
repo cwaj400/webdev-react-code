@@ -20,8 +20,8 @@ class CourseManager extends React.Component {
                 <div className="container-fluid">
                     <h1 className="display">Welcome to Whiteboard!</h1>
                     <Link to="/whiteboard">
-                        Click To Load Courses|</Link>
-                    <Link to="/widgets">|Click to Load WidgetsWidgets</Link>
+                        Click To Load Courses</Link>||
+                    <Link to="/widgets">Click to Load WidgetsWidgets</Link>
                     <Route path='/widgets' component={WidgetListContainer}/>
                     <Route path="/course/:courseId/edit" component={CourseEditor}/>
                     <Route path="/course/:courseId/edit/:moduleId" component={ModuleListItem}/>

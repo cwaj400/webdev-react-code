@@ -1,9 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import LessonService from '../services/LessonService';
 import ModuleSevice from '../services/ModuleSevice';
 import Lessons from '../components/Lessons';
 import LessonEditor from './LessonEditor';
+import CourseList from "./CourseList";
+import WidgetListContainer from "./widgets/WidgetListContainer";
 
 
 class ModuleEditor extends React.Component {
@@ -92,7 +94,6 @@ class ModuleEditor extends React.Component {
     }
 
 
-//TODO: delete lesson
     findAllLessonsForModule(courseId, moduleId) {
         console.log(this.state.lessons);
         this.lessonService.findAllLessonsForModule(courseId, moduleId).then((lessons) => {
@@ -117,7 +118,6 @@ class ModuleEditor extends React.Component {
                     this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
                 });
         }
-        //alert("Lesson Created!");
     }
 
     deleteLesson(lessonId) {
@@ -161,7 +161,7 @@ class ModuleEditor extends React.Component {
                         {this.renderListOfLessons()}
                     </div>
                     <div>
-                        <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
+                        <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/widgets" component={WidgetListContainer}/>
                     </div>
                 </div>
             </div>

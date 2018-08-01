@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
-import {Link}
-    from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
 export default class ModuleListItem extends React.Component {

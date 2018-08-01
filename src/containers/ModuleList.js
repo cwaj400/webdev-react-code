@@ -4,8 +4,7 @@ import ModuleListItem from '../components/ModuleListItem';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../stylesheet.css';
 import ModuleEditor from "../containers/ModuleEditor";
-import {BrowserRouter as Router, Route}
-    from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 export default class ModuleList extends React.Component {
 

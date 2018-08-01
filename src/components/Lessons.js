@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 export default class Lessons extends React.Component {
     constructor(props) {
@@ -27,11 +27,13 @@ export default class Lessons extends React.Component {
     //TODO: click twice
     render() {
         return (
+
             <div>
                 <ul>
-                    <li><Link className="text-light"
-                              to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
-                        <h5>{this.props.lesson.title} </h5>
+                    <li>
+                        <Link className="text-justify"
+                              to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/widgets`}>
+                        <h5>{this.props.lesson.title}</h5>
                     </Link>
                         <form className="form-inline">
                             <div className="input-group">

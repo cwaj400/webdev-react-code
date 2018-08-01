@@ -1,5 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import WidgetListContainer from './widgets/WidgetListContainer.js';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import {WidgetReducer} from "../reducers/WidgetReducer";
+
+let store = createStore(WidgetReducer);
 
 class LessonEditor extends React.Component {
     constructor(props) {
